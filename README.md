@@ -1,2 +1,2 @@
 # Oh-Snap
-Lesson on Snap.SVG
+:crocodile: Lesson on Snap.SVG
