@@ -78,6 +78,12 @@ function makeEye(x){
 	return group
 }
 
+function addTransformation(element, transformation){
+	//e.g. addTransformation(leftEye.children()[1],"r45")
+	//just doing leftEye.children()[1].transform("r45") would get rid of the eye's translation
+	element.transform(transformation+element.transform().string)
+}
+
 
 var leftEye = makeEye(leftEyeX)
 var rightEye = makeEye(rightEyeX)
