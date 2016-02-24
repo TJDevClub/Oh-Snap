@@ -34,15 +34,26 @@ function makeEye(x){
 		// 	stroke: Snap.hsl(Math.random() * 360, 50, 50)
 		// })//instead of just setting it, we'll animate it
 		var thisPupil = this
+		if(thisPupil.isAnimating)
+			return
+		thisPupil.isAnimating = true
+
 		thisPupil.animate({//change to a random stroke color, and increase the stroke width temporarily
 			stroke: Snap.hsl(Math.random() * 360, 50, 50),
 			strokeWidth: pupilStrokeWidth * 1.5
 		}, animationTime)
+		thisPupil.parent().children()[0].animate({r: rad * 1.0625}, animationTime)
 
 		setTimeout(function(){//put the stroke width back to normal
 			thisPupil.animate({
 				strokeWidth: pupilStrokeWidth
 			}, animationTime)
+			thisPupil.parent().children()[0].animate({r: rad}, animationTime)
+
+			setTimeout(function(){
+				thisPupil.isAnimating = false
+			}, animationTime)
+
 		}, animationTime)
 
 	})
