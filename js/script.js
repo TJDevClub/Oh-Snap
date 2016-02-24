@@ -8,6 +8,8 @@ var rightEyeX = rad * 5
 var animationTime = 250
 var pupilStrokeWidth = 4
 
+var shadowFilter = s.filter(Snap.filter.shadow(0, 0, 4))
+
 function makeEye(x){
 	var eye = s.circle(x, startY, rad);
 
@@ -16,7 +18,8 @@ function makeEye(x){
 	eye.attr({
 		fill: "#fff",
 		stroke: "#000",
-		strokeWidth: 3
+		strokeWidth: 3,
+		filter: shadowFilter
 	})
 
 
@@ -57,7 +60,7 @@ function makeEye(x){
 	var group = s.group(eye, pupil)
 
 	eye.hover(function(){
-		
+
 		var thisEye = this
 		var thisGroup = thisEye.parent()
 		if(eye.inAnim().length)
