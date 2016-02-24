@@ -23,7 +23,7 @@ function makeEye(x){
 	var pupil = s.circle(x, startY, rad * pupilRatio);
 	pupil.attr({
 		fill: "#000",
-		stroke: "#00f",
+		stroke: Snap.hsl(Math.random() * 360, 50, 50),
 		strokeWidth: pupilStrokeWidth
 	})
 
