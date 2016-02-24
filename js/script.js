@@ -44,16 +44,19 @@ function makeEye(x){
 		thisPupil.animate({//change to a random stroke color, and increase the stroke width temporarily
 			stroke: Snap.hsl(Math.random() * 360, 50, 50),
 			strokeWidth: pupilStrokeWidth * 1.5
-		}, animationTime)
-		thisPupil.parent().children()[0].animate({r: rad * 1.0625}, animationTime)
-
-		setTimeout(function(){//put the stroke width back to normal
+		}, animationTime, mina.linear, function(){
 			thisPupil.animate({
 				strokeWidth: pupilStrokeWidth
 			}, animationTime)
-			thisPupil.parent().children()[0].animate({r: rad}, animationTime)
+		})
 
-		}, animationTime)
+		thisPupil.parent().children()[0].animate({
+			r: rad * 1.0625
+		}, animationTime, mina.linear, function(){
+			
+			thisPupil.parent().children()[0].animate({r: rad}, animationTime)
+		})
+
 
 	})
 
@@ -66,13 +69,10 @@ function makeEye(x){
 		if(eye.inAnim().length)
 			return
 
-		thisGroup.children()[1].animate({r: rad * pupilRatio * 1.25}, animationTime)
-
-		setTimeout(function(){
-
+		thisGroup.children()[1].animate({r: rad * pupilRatio * 1.25}, animationTime, mina.linear, function(){
 			thisGroup.children()[1].animate({r: rad * pupilRatio}, animationTime)
+		})
 
-		}, animationTime)
 	})
 
 	return group
