@@ -34,9 +34,9 @@ function makeEye(x){
 		// 	stroke: Snap.hsl(Math.random() * 360, 50, 50)
 		// })//instead of just setting it, we'll animate it
 		var thisPupil = this
-		if(thisPupil.isAnimating)
+		if(thisPupil.inAnim().length > 0)
 			return
-		thisPupil.isAnimating = true
+		
 
 		thisPupil.animate({//change to a random stroke color, and increase the stroke width temporarily
 			stroke: Snap.hsl(Math.random() * 360, 50, 50),
@@ -50,10 +50,6 @@ function makeEye(x){
 			}, animationTime)
 			thisPupil.parent().children()[0].animate({r: rad}, animationTime)
 
-			setTimeout(function(){
-				thisPupil.isAnimating = false
-			}, animationTime)
-
 		}, animationTime)
 
 	})
@@ -61,18 +57,17 @@ function makeEye(x){
 	var group = s.group(eye, pupil)
 
 	eye.hover(function(){
-		var thisGroup = eye.parent()
-		if(thisGroup.isAnimating)
+		
+		var thisEye = this
+		var thisGroup = thisEye.parent()
+		if(eye.inAnim().length)
 			return
 
-		thisGroup.isAnimating = true
 		thisGroup.children()[1].animate({r: rad * pupilRatio * 1.25}, animationTime)
-		setTimeout(function(){
-			thisGroup.children()[1].animate({r: rad * pupilRatio}, animationTime)
 
-			setTimeout(function(){
-				thisGroup.isAnimating = false
-			}, animationTime)
+		setTimeout(function(){
+
+			thisGroup.children()[1].animate({r: rad * pupilRatio}, animationTime)
 
 		}, animationTime)
 	})
